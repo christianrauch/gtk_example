@@ -8,8 +8,13 @@ activate (GtkApplication* app,
           gpointer        user_data)
 {
   GtkWidget *window;
+  GtkWidget *header;
 
   window = gtk_application_window_new (app);
+  header = gtk_header_bar_new();
+  gtk_window_set_titlebar((GtkWindow*)window, header);
+  gtk_header_bar_set_show_close_button((GtkHeaderBar*)header, TRUE);
+
   gtk_window_set_title (GTK_WINDOW (window), "Window");
   gtk_window_set_default_size (GTK_WINDOW (window), 200, 200);
   gtk_widget_show_all (window);
