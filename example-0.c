@@ -43,12 +43,12 @@ print_child(GtkWidget *widget, gpointer data)
 //  }
 }
 
-gboolean
-draw(GtkWidget    *widget, cairo_t *cr, gpointer      user_data)
-{
-  gtk_widget_draw(widget, cr);
-  return TRUE;
-}
+//gboolean
+//draw(GtkWidget    *widget, cairo_t *cr, gpointer      user_data)
+//{
+////  gtk_widget_draw(widget, cr); // SIGSEGV
+//  return TRUE;
+//}
 
 static void
 activate (GtkApplication* app,
@@ -63,7 +63,7 @@ activate (GtkApplication* app,
   gtk_window_set_titlebar((GtkWindow*)window, header);
   gtk_header_bar_set_show_close_button((GtkHeaderBar*)header, TRUE);
 
-//  gtk_window_set_title (GTK_WINDOW (window), "Window");
+  gtk_window_set_title (GTK_WINDOW (window), "Window");
   gtk_window_set_default_size (GTK_WINDOW (window), 300, 200);
   gtk_widget_show_all (window);
 
@@ -75,7 +75,7 @@ activate (GtkApplication* app,
 
 //  gtk_container_forall(GTK_CONTAINER(header), &container_cb, NULL);
   
-  g_signal_connect(window, "draw", G_CALLBACK(draw), NULL);
+//  g_signal_connect(header, "draw", G_CALLBACK(draw), NULL);
   
 //  const int lvl = 0;
 //  print_child(window, (void*)&lvl);
@@ -88,6 +88,11 @@ activate (GtkApplication* app,
   
   GdkEventButton ev;
   gtk_main_do_event((GdkEvent*)&ev);
+  
+  GtkAllocation allocation;
+  int baseline;
+  gtk_widget_get_allocated_size (window, &allocation, &baseline);
+  gtk_widget_size_allocate_with_baseline (window, &allocation, baseline);
 
    cairo_surface_t * srf = cairo_image_surface_create (
          CAIRO_FORMAT_ARGB32,
