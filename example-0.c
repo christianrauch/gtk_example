@@ -59,9 +59,9 @@ activate (GtkApplication* app,
 
   window = gtk_application_window_new (app);
 //  window = gtk_offscreen_window_new();
-  header = gtk_header_bar_new();
-  gtk_window_set_titlebar((GtkWindow*)window, header);
-  gtk_header_bar_set_show_close_button((GtkHeaderBar*)header, TRUE);
+//  header = gtk_header_bar_new();
+//  gtk_window_set_titlebar((GtkWindow*)window, header);
+//  gtk_header_bar_set_show_close_button((GtkHeaderBar*)header, TRUE);
 
   gtk_window_set_title (GTK_WINDOW (window), "Window");
   gtk_window_set_default_size (GTK_WINDOW (window), 300, 200);
@@ -89,10 +89,14 @@ activate (GtkApplication* app,
   GdkEventButton ev;
   gtk_main_do_event((GdkEvent*)&ev);
   
+//  GtkAllocation allocation;
+//  int baseline;
+//  gtk_widget_get_allocated_size (window, &allocation, &baseline);
+//  gtk_widget_size_allocate_with_baseline (window, &allocation, baseline);
+  
   GtkAllocation allocation;
-  int baseline;
-  gtk_widget_get_allocated_size (window, &allocation, &baseline);
-  gtk_widget_size_allocate_with_baseline (window, &allocation, baseline);
+  gtk_widget_get_allocation (window, &allocation);
+  gtk_widget_size_allocate(window, &allocation);
 
    cairo_surface_t * srf = cairo_image_surface_create (
          CAIRO_FORMAT_ARGB32,
