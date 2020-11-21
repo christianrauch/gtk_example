@@ -11,3 +11,7 @@ target_link_libraries(example-0 ${GTK3_LIBRARIES})
 add_executable(example-1 example-1.c)
 target_include_directories(example-1 PUBLIC ${GTK3_INCLUDE_DIRS})
 target_link_libraries(example-1 ${GTK3_LIBRARIES})
+
+add_executable(example-2 example-2.c)
+target_include_directories(example-2 PUBLIC ${GTK3_INCLUDE_DIRS})
+target_link_libraries(example-2 ${GTK3_LIBRARIES})
